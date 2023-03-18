@@ -80,7 +80,8 @@ io.on('connection', (socket) => {
 });
 
 // Your code
-
+if (process.env.NODE_ENV === "production") {
+  const path = require("path");
   app.use(express.static(path.resolve(__dirname, 'client', 'build')));
   app.get("*", (req, res) => {
       res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'),function (err) {
@@ -89,10 +90,10 @@ io.on('connection', (socket) => {
           }
       });
   })
-
+}
 // Your code
 
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 6000;
 
 server.listen(PORT, () => console.log(`Listening on port ${PORT}`));
